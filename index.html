@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Sayen Akhtar Shaikh </title>
+    <title>Sayen Akhtar Shaikh | Computer Science Portfolio</title>
     <!-- Google Fonts + Inter variable -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome 6 -->
@@ -34,7 +34,7 @@
             background: #ffffff;
             border-radius: 2rem;
             box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         .top-bar {
@@ -211,6 +211,7 @@
             margin-top: 0.2rem;
             color: #2c7da0;
             width: 20px;
+            flex-shrink: 0;
         }
 
         .tech-stack {
@@ -248,6 +249,7 @@
             font-size: 1.8rem;
             font-weight: 700;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
 
         .project-icon.pharmacy {
@@ -395,6 +397,9 @@
                 height: 48px;
                 font-size: 1.5rem;
             }
+            .workflow-card {
+                min-width: 100%;
+            }
         }
     </style>
 </head>
@@ -409,7 +414,7 @@
     </div>
 
     <div class="content-inner">
-        <!-- Profile Header - Phone number removed -->
+        <!-- Profile Header - Phone number removed, fixed marker icon -->
         <div class="profile-row">
             <div class="name-section">
                 <h1>Sayen Akhtar Shaikh</h1>
@@ -421,7 +426,7 @@
                 </div>
             </div>
             <div class="contact-block">
-                <p><i class="fas fa-map-marker-alt"> Bangalore, India</p>
+                <p><i class="fas fa-map-marker-alt"></i> Bangalore, India</p>
                 <p><i class="fas fa-envelope"></i> <a href="mailto:work.sayen@protonmail.com">work.sayen@protonmail.com</a></p>
             </div>
         </div>
@@ -461,7 +466,7 @@
                 </div>
             </div>
 
-            <!-- Technical Experience - Updated: Programming Languages Known + Mobile Development (Play Store ready) -->
+            <!-- Technical Experience -->
             <div class="card-modern">
                 <h3><i class="fas fa-briefcase"></i> Technical Experience</h3>
                 <ul class="exp-list">
@@ -618,7 +623,7 @@
         <!-- Declaration -->
         <div class="footer-note">
             <i class="far fa-check-circle"></i> All the information provided above is true to the best of my knowledge.
-            <br><span style="font-size: 0.7rem;">© 2026 Sayen Akhtar Shaikh </span>
+            <br><span style="font-size: 0.7rem;">© 2026 Sayen Akhtar Shaikh</span>
         </div>
     </div>
 </div>
