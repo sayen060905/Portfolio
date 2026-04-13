@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Sayen Akhtar Shaikh | Portfolio | Pharmacy + RCS Projects</title>
+    <!-- Google Fonts + Inter variable -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: #edf2f9;
+            color: #1a2c3e;
+            line-height: 1.45;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portfolio-card {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+        }
+
+        .top-bar {
+            padding: 1rem 1.8rem;
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f6;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .datetime-badge {
+            background: #f0f4fa;
+            padding: 0.45rem 1.3rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: 'Inter', monospace;
+            color: #1f5e7e;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .datetime-badge i {
+            font-size: 0.8rem;
+            color: #2c7da0;
+        }
+
+        .content-inner {
+            padding: 1.8rem 2rem 2rem 2rem;
+        }
+
+        .profile-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .name-section h1 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-weight: 800;
+            background: linear-gradient(125deg, #1f3b4c, #236477);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .student-chip {
+            background: #e7edf3;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1a5d7a;
+            margin-top: 8px;
+        }
+
+        .contact-block {
+            background: #f9fbfe;
+            border-radius: 1.5rem;
+            padding: 0.8rem 1.2rem;
+            min-width: 240px;
+            border: 1px solid #ecf1f7;
+        }
+
+        .contact-block p {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 6px 0;
+            flex-wrap: wrap;
+            word-break: break-word;
+        }
+
+        .contact-block i {
+            width: 1.2rem;
+            color: #2c7da0;
+        }
+
+        .contact-block a {
+            color: #1d5e7c;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .info-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+            margin: 1.8rem 0 1.2rem;
+        }
+
+        .card-modern {
+            background: #ffffff;
+            border-radius: 1.6rem;
+            padding: 1.2rem 1.4rem;
+            border: 1px solid #eef3f9;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .card-modern h3 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #2c7da0;
+            padding-left: 14px;
+            color: #1c3e53;
+        }
+
+        .edu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .edu-entry {
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 0.7rem;
+        }
+
+        .edu-entry:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .edu-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #0e2f40;
+        }
+
+        .edu-meta {
+            font-size: 0.85rem;
+            color: #4b6f88;
+            margin-top: 4px;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: #eef2fa;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin: 0.2rem 0.2rem 0 0;
+            color: #1f5e7e;
+        }
+
+        .exp-list {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+
+        .exp-list li {
+            margin-bottom: 0.85rem;
+            font-size: 0.92rem;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            line-height: 1.4;
+        }
+
+        .exp-list li i {
+            margin-top: 0.2rem;
+            color: #2c7da0;
+            width: 20px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        /* Project Sections */
+        .project-showcase {
+            background: linear-gradient(135deg, #f8fafd 0%, #ffffff 100%);
+            border-radius: 1.6rem;
+            padding: 1.4rem;
+            border: 1px solid #e2edf7;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .project-icon.pharmacy {
+            background: linear-gradient(145deg, #1e7a4a, #0f5a36);
+        }
+        .project-icon.pharmacy i {
+            font-size: 2rem;
+        }
+
+        .project-icon.rcs {
+            background: linear-gradient(145deg, #1a5f7a, #0e4156);
+        }
+        .project-icon.rcs i {
+            font-size: 1.8rem;
+        }
+
+        .project-title {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #1a3a4e;
+        }
+
+        .project-subtitle {
+            color: #2c7da0;
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .org-badge {
+            background: #e8d9c5;
+            color: #7a5a3a;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 8px;
+        }
+
+        .location-badge {
+            background: #d9e6f2;
+            color: #1a5d7a;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 6px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 0.8rem 0;
+        }
+
+        .feature-item {
+            background: #eef3fa;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .workflow-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+            background: #f0f5fa;
+            border-radius: 1rem;
+            padding: 0.8rem;
+        }
+
+        .workflow-card {
+            flex: 1;
+            min-width: 150px;
+            background: white;
+            padding: 0.6rem 0.8rem;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .workflow-card i {
+            color: #2c7da0;
+            margin-right: 6px;
+        }
+
+        .tech-stack-project {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 0.8rem;
+        }
+
+        .highlight-block {
+            background: #eef4fb;
+            border-radius: 1.4rem;
+            padding: 1rem 1.3rem;
+            margin: 0.8rem 0 0.5rem;
+            border-left: 5px solid #2c7da0;
+        }
+
+        .footer-note {
+            margin-top: 1.8rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #7e92a2;
+            border-top: 1px solid #eef2f7;
+            padding-top: 1.3rem;
+        }
+
+        hr {
+            margin: 0.8rem 0;
+            border: none;
+            border-top: 1px solid #e9edf2;
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding: 0.8rem;
+            }
+            .content-inner {
+                padding: 1rem 1.2rem 1.6rem;
+            }
+            .profile-row {
+                flex-direction: column;
+            }
+            .contact-block {
+                width: 100%;
+            }
+            .project-title {
+                font-size: 1.2rem;
+            }
+            .top-bar {
+                padding: 0.8rem 1rem;
+            }
+            .project-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="portfolio-card">
+    <!-- Top right: dynamic date & time -->
+    <div class="top-bar">
+        <div class="datetime-badge" id="liveDateTime">
+            <i class="far fa-clock"></i>
+            <span id="dateTimeText">Loading...</span>
+        </div>
+    </div>
+
+    <div class="content-inner">
+        <!-- Profile Header - Phone number removed -->
+        <div class="profile-row">
+            <div class="name-section">
+                <h1>Sayen Akhtar Shaikh</h1>
+                <div class="student-chip">
+                    <i class="fas fa-laptop-code"></i> Bachelor of Computer Science (Pursuing)
+                </div>
+                <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #4f6f87;">
+                    <i class="fas fa-calendar-alt"></i> DOB: 6<sup>th</sup> September 2005
+                </div>
+            </div>
+            <div class="contact-block">
+                <p><i class="fas fa-map-marker-alt"></i> 9<sup>th</sup> Building, 11<sup>th</sup> Main Rd, Vasanth Nagar, Bangalore - 560001</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:work.sayen@protonmail.com">work.sayen@protonmail.com</a></p>
+                <!-- Phone number removed as requested -->
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <!-- Education Section -->
+            <div class="card-modern">
+                <h3><i class="fas fa-graduation-cap"></i> Educational Qualification</h3>
+                <div class="edu-list">
+                    <div class="edu-entry">
+                        <div class="edu-title">📘 10th Standard</div>
+                        <div class="edu-meta">GSSS, Shaheed Dweep, South Andaman</div>
+                    </div>
+                    <div class="edu-entry">
+                        <div class="edu-title">📙 12th Standard</div>
+                        <div class="edu-meta">GMSSS, Aberdeen, Port Blair</div>
+                    </div>
+                    <div class="edu-entry">
+                        <div class="edu-title">🎓 Diploma in Computer Engineering (3 years)</div>
+                        <div class="edu-meta">DBRAIT, Pahargaon, Port Blair</div>
+                    </div>
+                    <div class="edu-entry">
+                        <div class="edu-title">📚 Bachelor's Degree (Computer Science) – Current</div>
+                        <div class="edu-meta">MCC, Bangalore · <strong>Pursuing</strong></div>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <div style="font-weight: 600; font-size: 0.85rem; margin-bottom: 6px;">📌 Core Competencies</div>
+                    <div class="tech-stack">
+                        <span class="skill-badge">Data Structures & Algorithms</span>
+                        <span class="skill-badge">DBMS</span>
+                        <span class="skill-badge">Computer Networks</span>
+                        <span class="skill-badge">OS (Linux)</span>
+                        <span class="skill-badge">AWS Cloud</span>
+                        <span class="skill-badge">Advanced Networking</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Experience - Updated: Programming Languages Known + Mobile Development (Play Store ready) -->
+            <div class="card-modern">
+                <h3><i class="fas fa-briefcase"></i> Technical Experience</h3>
+                <ul class="exp-list">
+                    <li><i class="fas fa-code"></i> <strong>Programming Languages Known:</strong> C, C++, Java, Advanced Java (JDBC, Desktop Apps), SQL, Python, PHP.</li>
+                    <li><i class="fas fa-database"></i> <strong>Core CS:</strong> DSA, DBMS, Fundamentals & Advanced Networking, OS (Linux).</li>
+                    <li><i class="fas fa-mobile-alt"></i> <strong>Mobile Development:</strong> Built production-ready Android applications using Java and Android Studio. Apps are designed, developed, and tested for deployment — can be published to Google Play Store or distributed as APKs for internal use. Experience includes UI/UX implementation, local database (SQLite), REST API integration, and Firebase services.</li>
+                    <li><i class="fas fa-cloud-upload-alt"></i> <strong>Web & Cloud:</strong> Experienced in purchasing domains from registrars (GoDaddy, Namecheap, Hostinger) and deploying websites using various hosting platforms including Hostinger, AWS, and cPanel-based shared hosting. Managed DNS configurations, SSL certificates, and server deployments.</li>
+                    <li><i class="fas fa-desktop"></i> <strong>Desktop Applications:</strong> Java Swing/JavaFX with JDBC for database connectivity.</li>
+                </ul>
+            </div>
+
+            <!-- PROJECT 1: Pharmacy Inventory Management System -->
+            <div class="project-showcase">
+                <div class="project-header">
+                    <div class="project-icon pharmacy">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <div>
+                        <div class="project-title">Pharmacy Inventory Management System</div>
+                        <div class="project-subtitle">
+                            <i class="fas fa-desktop"></i> Desktop Application · Java + JDBC + Swing/JavaFX
+                            <span class="org-badge"><i class="fas fa-hospital-user"></i> Retail Pharmacy</span>
+                            <span class="location-badge"><i class="fas fa-chart-line"></i> Inventory + Expiry Tracking</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="font-size: 0.92rem; margin-bottom: 0.8rem; line-height: 1.5;">
+                    <strong>Complete desktop inventory solution</strong> for pharmacy stores with <strong>expiry date tracking</strong>, 
+                    stock alerts, billing, and supplier management. Built using <strong>Java</strong> with <strong>JDBC</strong> for MySQL 
+                    connectivity and <strong>Swing/JavaFX</strong> for the modern graphical user interface.
+                </p>
+
+                <div class="feature-list">
+                    <span class="feature-item"><i class="fas fa-calendar-exclamation"></i> Expiry Date Tracking</span>
+                    <span class="feature-item"><i class="fas fa-bell"></i> Auto-expiry Alerts</span>
+                    <span class="feature-item"><i class="fas fa-boxes"></i> Stock Management</span>
+                    <span class="feature-item"><i class="fas fa-receipt"></i> Billing System</span>
+                    <span class="feature-item"><i class="fas fa-truck"></i> Supplier Management</span>
+                    <span class="feature-item"><i class="fas fa-chart-line"></i> Low Stock Warnings</span>
+                    <span class="feature-item"><i class="fas fa-search"></i> Product Search</span>
+                    <span class="feature-item"><i class="fas fa-file-pdf"></i> Sales Reports</span>
+                </div>
+
+                <div class="workflow-grid">
+                    <div class="workflow-card">
+                        <i class="fas fa-hourglass-half"></i> <strong>Expiry Management</strong><br>
+                        <span style="font-size: 0.7rem;">Track expiry dates · Notify near-expiry products · Auto-flag expired items</span>
+                    </div>
+                    <div class="workflow-card">
+                        <i class="fas fa-chart-simple"></i> <strong>Stock Alerts</strong><br>
+                        <span style="font-size: 0.7rem;">Low inventory warnings · Reorder suggestions · Dashboard metrics</span>
+                    </div>
+                    <div class="workflow-card">
+                        <i class="fas fa-cash-register"></i> <strong>Billing & POS</strong><br>
+                        <span style="font-size: 0.7rem;">Fast checkout · Bill printing · GST calculation</span>
+                    </div>
+                </div>
+
+                <div style="background: #eef3fa; border-radius: 1rem; padding: 0.6rem 1rem; margin: 0.6rem 0;">
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; justify-content: space-between;">
+                        <div>
+                            <i class="fab fa-java" style="color:#2c7da0;"></i> 
+                            <strong>Java Desktop Application</strong> — JDBC · Swing/JavaFX GUI · MySQL Backend
+                        </div>
+                        <div class="tech-stack-project">
+                            <span class="skill-badge"><i class="fab fa-java"></i> Java</span>
+                            <span class="skill-badge"><i class="fas fa-database"></i> JDBC</span>
+                            <span class="skill-badge"><i class="fas fa-desktop"></i> Swing/JavaFX</span>
+                            <span class="skill-badge"><i class="fas fa-database"></i> MySQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 0.6rem; font-size: 0.8rem; background: #eef3fa; padding: 0.5rem 1rem; border-radius: 40px; display: inline-block;">
+                    <i class="fas fa-chart-line" style="color:#2c7da0;"></i> <strong>Impact:</strong> Reduced inventory losses by preventing expired stock sales · Streamlined billing operations
+                </div>
+            </div>
+
+            <!-- PROJECT 2: RCS Office Management System -->
+            <div class="project-showcase">
+                <div class="project-header">
+                    <div class="project-icon rcs">
+                        <i class="fas fa-building-gear"></i>
+                    </div>
+                    <div>
+                        <div class="project-title">RCS Office Management System</div>
+                        <div class="project-subtitle">
+                            <i class="fas fa-map-pin"></i> Sri Vijayapuram, Andaman & Nicobar Islands
+                            <span class="org-badge"><i class="fas fa-landmark"></i> Government Zone Infrastructure</span>
+                            <span class="location-badge"><i class="fas fa-umbrella-beach"></i> A&N Islands</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="font-size: 0.92rem; margin-bottom: 0.8rem; line-height: 1.5;">
+                    <strong>Enterprise-grade HR solution</strong> built for the RCS Office, <strong>Sri Vijayapuram</strong> — located in the 
+                    <strong>Andaman & Nicobar Islands</strong>, India. The system manages employee lifecycle, leave tracking, inter‑zone transfers, 
+                    and role‑based approvals for this geographically strategic island region. Complete audit trails and digital receipt generation.
+                </p>
+
+                <div class="feature-list">
+                    <span class="feature-item"><i class="fas fa-users"></i> Employee Management</span>
+                    <span class="feature-item"><i class="fas fa-calendar-check"></i> Leave Requests & Balances</span>
+                    <span class="feature-item"><i class="fas fa-exchange-alt"></i> Zone Transfer System</span>
+                    <span class="feature-item"><i class="fas fa-stamp"></i> Digital Receipts (ReceiptID)</span>
+                    <span class="feature-item"><i class="fas fa-user-shield"></i> Role-Based Access</span>
+                    <span class="feature-item"><i class="fas fa-chart-line"></i> Audit Trail & System Logs</span>
+                    <span class="feature-item"><i class="fas fa-globe"></i> Geographic Hierarchy</span>
+                    <span class="feature-item"><i class="fas fa-file-alt"></i> Supporting Documents</span>
+                </div>
+
+                <div class="workflow-grid">
+                    <div class="workflow-card">
+                        <i class="fas fa-tasks"></i> <strong>Leave Workflow</strong><br>
+                        <span style="font-size: 0.7rem;">Request → Competent Authority → Balance Update → Receipt</span>
+                    </div>
+                    <div class="workflow-card">
+                        <i class="fas fa-arrows-alt"></i> <strong>Transfer Eligibility</strong><br>
+                        <span style="font-size: 0.7rem;">MinTenure validation → Approval → Zone/Location update</span>
+                    </div>
+                    <div class="workflow-card">
+                        <i class="fas fa-shield-alt"></i> <strong>Competent Authority</strong><br>
+                        <span style="font-size: 0.7rem;">Designation-based approval with limits</span>
+                    </div>
+                </div>
+
+                <div style="background: #eef3fa; border-radius: 1rem; padding: 0.6rem 1rem; margin: 0.6rem 0;">
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; justify-content: space-between;">
+                        <div>
+                            <i class="fas fa-database" style="color:#2c7da0;"></i> 
+                            <strong>Normalized MySQL Schema</strong> — 20+ tables with foreign keys, audit fields, and receipt tracking
+                        </div>
+                        <div class="tech-stack-project">
+                            <span class="skill-badge"><i class="fas fa-database"></i> MySQL</span>
+                            <span class="skill-badge"><i class="fab fa-php"></i> PHP</span>
+                            <span class="skill-badge"><i class="fab fa-python"></i> Python</span>
+                            <span class="skill-badge"><i class="fas fa-cloud-upload-alt"></i> AWS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 0.6rem; font-size: 0.8rem; background: #eef3fa; padding: 0.5rem 1rem; border-radius: 40px; display: inline-block;">
+                    <i class="fas fa-crown" style="color:#e6a017;"></i> <strong>Impact:</strong> Centralized HR operations for Sri Vijayapuram zone (A&N Islands) · 40% faster processing · Full audit compliance
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Objective -->
+        <div class="highlight-block">
+            <p><i class="fas fa-bullseye" style="color:#2c7da0;"></i> <strong>Professional Aim:</strong> I aim to work on real-world problems to continuously learn, improve my skills, and explore emerging technologies.</p>
+        </div>
+
+        <!-- Declaration -->
+        <div class="footer-note">
+            <i class="far fa-check-circle"></i> All the information provided above is true to the best of my knowledge.
+            <br><span style="font-size: 0.7rem;">© 2026 Sayen Akhtar Shaikh — Computer Science Portfolio | Pharmacy Inventory + RCS Projects</span>
+        </div>
+    </div>
+</div>
+
+<!-- Live Date & Time Script -->
+<script>
+    (function updateDateTime() {
+        const now = new Date();
+        const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = now.toLocaleDateString(undefined, dateOptions);
+        const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const formattedTime = now.toLocaleTimeString(undefined, timeOptions);
+        const fullString = `${formattedDate} · ${formattedTime}`;
+        const dateSpan = document.getElementById('dateTimeText');
+        if (dateSpan) dateSpan.textContent = fullString;
+        setTimeout(updateDateTime, 1000);
+    })();
+    window.addEventListener('DOMContentLoaded', () => {
+        const now = new Date();
+        const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = now.toLocaleDateString(undefined, dateOptions);
+        const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const formattedTime = now.toLocaleTimeString(undefined, timeOptions);
+        const fullString = `${formattedDate} · ${formattedTime}`;
+        const dateSpan = document.getElementById('dateTimeText');
+        if (dateSpan) dateSpan.textContent = fullString;
+    });
+</script>
+</body>
+</html>
