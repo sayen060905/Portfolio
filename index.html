@@ -753,8 +753,11 @@
         // Live Clock functionality
         const updateClock = () => {
             const now = new Date();
-            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            document.getElementById('clock').textContent = now.toLocaleTimeString(undefined, options);
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+            const timeString = now.toLocaleTimeString(undefined, timeOptions);
+            const dateString = now.toLocaleDateString(undefined, dateOptions);
+            document.getElementById('clock').textContent = `${dateString} · ${timeString} (UTC +5:30)`;
         };
 
         // Initialize Clock
