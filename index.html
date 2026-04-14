@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Sayen Akhtar Shaikh </title>
-    <!-- Google Fonts + Inter variable -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayen Akhtar Shaikh - Dashboard</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-color: #050505;
+            --sidebar-bg: rgba(20, 20, 20, 0.6);
+            --content-bg: rgba(30, 30, 30, 0.4);
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --card-hover: rgba(255, 255, 255, 0.05);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -16,641 +31,737 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            background: #edf2f9;
-            color: #1a2c3e;
-            line-height: 1.45;
-            padding: 1rem;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.08) 0%, transparent 40%);
+            color: var(--text-main);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            /* Force absolutely NO page-level scrolling */
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 2rem;
         }
 
-        .portfolio-card {
-            max-width: 1100px;
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* App Window */
+        .dashboard-container {
             width: 100%;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 2rem;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-            overflow-x: hidden;
+            height: 100%;
+            max-width: 1600px;
+            max-height: 900px;
+            background: rgba(15, 15, 15, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease backwards;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            border-radius: 20px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 10px 20px var(--primary-glow);
+        }
+
+        .name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .title {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background: var(--card-hover);
+            color: var(--text-main);
+        }
+
+        .nav-item.active {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            border-left: 3px solid var(--primary);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Main Content Pane */
+        .main-pane {
+            flex-grow: 1;
+            padding: 2.5rem 3rem;
+            position: relative;
+            background: var(--content-bg);
+            display: flex;
+            flex-direction: column;
+            /* Internal invisible scroll as a safety net only, no visible track */
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .main-pane::-webkit-scrollbar {
+            display: none;
         }
 
         .top-bar {
-            padding: 1rem 1.8rem;
-            background: #ffffff;
-            border-bottom: 1px solid #eef2f6;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
+            margin-bottom: 2rem;
+            flex-shrink: 0;
         }
 
-        .datetime-badge {
-            background: #f0f4fa;
-            padding: 0.45rem 1.3rem;
-            border-radius: 60px;
+        .pane-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .clock-badge {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
             font-size: 0.85rem;
-            font-weight: 500;
-            font-family: 'Inter', monospace;
-            color: #1f5e7e;
-            display: inline-flex;
+            color: var(--text-muted);
+            display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .datetime-badge i {
-            font-size: 0.8rem;
-            color: #2c7da0;
+        /* Tabs */
+        .tab-content {
+            display: none;
+            flex-grow: 1;
+            height: 100%;
+            animation: fadeScale 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        .content-inner {
-            padding: 1.8rem 2rem 2rem 2rem;
-        }
-
-        .profile-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .name-section h1 {
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
-            font-weight: 800;
-            background: linear-gradient(125deg, #1f3b4c, #236477);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.3px;
-        }
-
-        .student-chip {
-            background: #e7edf3;
-            display: inline-block;
-            padding: 0.25rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #1a5d7a;
-            margin-top: 8px;
-        }
-
-        .contact-block {
-            background: #f9fbfe;
-            border-radius: 1.5rem;
-            padding: 0.8rem 1.2rem;
-            min-width: 240px;
-            border: 1px solid #ecf1f7;
-        }
-
-        .contact-block p {
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 6px 0;
-            flex-wrap: wrap;
-            word-break: break-word;
-        }
-
-        .contact-block i {
-            width: 1.2rem;
-            color: #2c7da0;
-        }
-
-        .contact-block a {
-            color: #1d5e7c;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .info-grid {
+        .tab-content.active {
             display: flex;
             flex-direction: column;
-            gap: 1.6rem;
-            margin: 1.8rem 0 1.2rem;
         }
 
-        .card-modern {
-            background: #ffffff;
-            border-radius: 1.6rem;
-            padding: 1.2rem 1.4rem;
-            border: 1px solid #eef3f9;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        .content-grid {
+            display: grid;
+            gap: 1.5rem;
+            height: 100%;
         }
 
-        .card-modern h3 {
-            font-size: 1.45rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-left: 4px solid #2c7da0;
-            padding-left: 14px;
-            color: #1c3e53;
-        }
-
-        .edu-list {
+        .c-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
         }
 
-        .edu-entry {
-            border-bottom: 1px dashed #e2e8f0;
-            padding-bottom: 0.7rem;
+        .c-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
-        .edu-entry:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
+        /* Overview Tab */
+        #overview .content-grid {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
         }
 
-        .edu-title {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #0e2f40;
+        .objective-card {
+            grid-column: 1 / -1;
+            flex-direction: row;
+            align-items: center;
+            gap: 1.5rem;
         }
 
-        .edu-meta {
-            font-size: 0.85rem;
-            color: #4b6f88;
-            margin-top: 4px;
+        .objective-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
         }
 
-        .skill-badge {
-            display: inline-block;
-            background: #eef2fa;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            margin: 0.2rem 0.2rem 0 0;
-            color: #1f5e7e;
+        .objective-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            font-style: italic;
         }
 
-        .exp-list {
+        .contact-list {
             list-style: none;
-            margin-top: 0.5rem;
-        }
-
-        .exp-list li {
-            margin-bottom: 0.85rem;
-            font-size: 0.92rem;
             display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            line-height: 1.4;
+            flex-direction: column;
+            gap: 1.2rem;
+            flex-grow: 1;
+            justify-content: center;
         }
 
-        .exp-list li i {
-            margin-top: 0.2rem;
-            color: #2c7da0;
-            width: 20px;
-            flex-shrink: 0;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 12px;
-        }
-
-        /* Project Sections */
-        .project-showcase {
-            background: linear-gradient(135deg, #f8fafd 0%, #ffffff 100%);
-            border-radius: 1.6rem;
-            padding: 1.4rem;
-            border: 1px solid #e2edf7;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-header {
+        .contact-list li {
             display: flex;
             align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
         }
 
-        .project-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 18px;
+        .contact-list i {
+            color: var(--primary);
+            width: 24px;
+            height: 24px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 700;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .edu-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .edu-item {
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 2px solid var(--border);
+        }
+
+        .edu-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* Experience Tab */
+        #experience {
+            overflow: hidden;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1.5rem;
             flex-shrink: 0;
         }
 
-        .project-icon.pharmacy {
-            background: linear-gradient(145deg, #1e7a4a, #0f5a36);
-        }
-        .project-icon.pharmacy i {
-            font-size: 2rem;
-        }
-
-        .project-icon.rcs {
-            background: linear-gradient(145deg, #1a5f7a, #0e4156);
-        }
-        .project-icon.rcs i {
-            font-size: 1.8rem;
-        }
-
-        .project-title {
-            font-size: 1.45rem;
-            font-weight: 700;
-            color: #1a3a4e;
-        }
-
-        .project-subtitle {
-            color: #2c7da0;
-            font-weight: 500;
+        .skill-tag {
+            background: rgba(56, 189, 248, 0.08);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             font-size: 0.85rem;
-            margin-top: 4px;
-        }
-
-        .org-badge {
-            background: #e8d9c5;
-            color: #7a5a3a;
-            padding: 0.2rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-left: 8px;
-        }
-
-        .location-badge {
-            background: #d9e6f2;
-            color: #1a5d7a;
-            padding: 0.2rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-left: 6px;
-        }
-
-        .feature-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin: 0.8rem 0;
-        }
-
-        .feature-item {
-            background: #eef3fa;
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
             font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+            border: 1px solid rgba(56, 189, 248, 0.15);
         }
 
-        .workflow-grid {
+        .exp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .exp-item {
+            flex-direction: row;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .exp-item i {
+            color: var(--primary);
+            font-size: 1.4rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .exp-item strong {
+            display: block;
+            color: #fff;
+            margin-bottom: 6px;
+            font-size: 1.05rem;
+        }
+
+        .exp-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Projects Tab */
+        #projects .content-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .proj-card {
+            justify-content: space-between;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+        }
+
+        .proj-header {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 1rem 0;
-            background: #f0f5fa;
-            border-radius: 1rem;
-            padding: 0.8rem;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1rem;
         }
 
-        .workflow-card {
-            flex: 1;
-            min-width: 150px;
-            background: white;
-            padding: 0.6rem 0.8rem;
-            border-radius: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        .proj-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #fff;
+            flex-shrink: 0;
         }
 
-        .workflow-card i {
-            color: #2c7da0;
-            margin-right: 6px;
+        .proj-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
         }
 
-        .tech-stack-project {
+        .proj-meta {
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        .proj-desc {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .proj-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 0.8rem;
         }
 
-        .highlight-block {
-            background: #eef4fb;
-            border-radius: 1.4rem;
-            padding: 1rem 1.3rem;
-            margin: 0.8rem 0 0.5rem;
-            border-left: 5px solid #2c7da0;
+        .proj-tag {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: #e2e8f0;
+            font-weight: 500;
         }
 
-        .footer-note {
-            margin-top: 1.8rem;
-            text-align: center;
-            font-size: 0.7rem;
-            color: #7e92a2;
-            border-top: 1px solid #eef2f7;
-            padding-top: 1.3rem;
-        }
-
-        hr {
-            margin: 0.8rem 0;
-            border: none;
-            border-top: 1px solid #e9edf2;
-        }
-
-        @media (max-width: 680px) {
-            body {
-                padding: 0.8rem;
+        /* Animations */
+        @keyframes fadeScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.98) translateY(10px);
             }
-            .content-inner {
-                padding: 1rem 1.2rem 1.6rem;
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
             }
-            .profile-row {
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Fallback (Changes layout only if screen is tiny) */
+        @media (max-width: 900px) {
+            .dashboard-container {
                 flex-direction: column;
+                height: 100%;
+                border-radius: 0;
             }
-            .contact-block {
+
+            body {
+                padding: 0;
+            }
+
+            .sidebar {
                 width: 100%;
+                padding: 1rem;
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+                overflow-x: auto;
             }
-            .project-title {
+
+            .profile {
+                margin: 0;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                text-align: left;
+            }
+
+            .avatar {
+                width: 50px;
+                height: 50px;
                 font-size: 1.2rem;
+                margin: 0;
             }
-            .top-bar {
-                padding: 0.8rem 1rem;
+
+            .nav-menu {
+                flex-direction: row;
             }
-            .project-icon {
-                width: 48px;
-                height: 48px;
-                font-size: 1.5rem;
+
+            .main-pane {
+                padding: 1.5rem;
             }
-            .workflow-card {
-                min-width: 100%;
+
+            #overview .content-grid,
+            .exp-grid,
+            #projects .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .objective-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .sidebar-footer {
+                display: none;
             }
         }
     </style>
 </head>
+
 <body>
-<div class="portfolio-card">
-    <!-- Top right: dynamic date & time -->
-    <div class="top-bar">
-        <div class="datetime-badge" id="liveDateTime">
-            <i class="far fa-clock"></i>
-            <span id="dateTimeText">Loading...</span>
+
+    <div class="dashboard-container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <div class="avatar">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <div>
+                    <div class="name">Sayen Akhtar</div>
+                    <div class="title">CS Student & Developer</div>
+                </div>
+            </div>
+
+            <div class="nav-menu">
+                <div class="nav-item active" onclick="switchTab('overview', this)">
+                    <i class="fas fa-user"></i> About Me
+                </div>
+                <div class="nav-item" onclick="switchTab('experience', this)">
+                    <i class="fas fa-code"></i> Skills & Exp
+                </div>
+                <div class="nav-item" onclick="switchTab('projects', this)">
+                    <i class="fas fa-rocket"></i> Projects
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                © 2026 Sayen Akhtar Shaikh
+            </div>
+        </div>
+
+        <!-- Main Pane -->
+        <div class="main-pane">
+
+            <div class="top-bar">
+                <h2 class="pane-title" id="paneTitle">About Me</h2>
+                <div class="clock-badge">
+                    <i class="far fa-clock"></i> <span id="clock">--:--:--</span>
+                </div>
+            </div>
+
+            <!-- 1. Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <div class="content-grid">
+
+                    <div class="c-card objective-card"
+                        style="flex-direction: column; align-items: flex-start; gap: 0.8rem;">
+                        <h2 style="font-size: 1.8rem; color: #fff; letter-spacing: -0.5px;">
+                            👋 Welcome! I'm Sayen.
+                        </h2>
+                        <div class="objective-text" style="font-style: normal; font-size: 1.05rem;">
+                            I'm an aspiring <strong>Software Developer</strong> and a Computer Science student based in
+                            Bangalore. My experience spans across building robust Desktop software, full-stack Mobile
+                            Applications, and setting up modern Web & Cloud Infrastructure. I love combining creativity
+                            with strong technical skills to build impactful, scalable systems that solve real-world
+                            problems. Feel free to explore my profile!
+                        </div>
+                    </div>
+
+                    <div class="c-card">
+                        <h3 style="margin-bottom: 1.2rem; color: #fff;">
+                            <i class="fas fa-address-card" style="color:var(--primary); margin-right:8px;"></i> Contact
+                        </h3>
+                        <ul class="contact-list">
+                            <li><i class="fas fa-map-marker-alt"></i> Bangalore, India</li>
+                            <li><i class="fas fa-envelope"></i> work.sayen@protonmail.com</li>
+                            <li><i class="fas fa-calendar-alt"></i> Born 6th Sept 2005</li>
+                            <li><i class="fas fa-university"></i> Pursuing Bachelor of CS</li>
+                        </ul>
+                    </div>
+
+                    <div class="c-card">
+                        <h3 style="margin-bottom: 1.2rem; color: #fff;">
+                            <i class="fas fa-graduation-cap" style="color:var(--primary); margin-right:8px;"></i>
+                            Education
+                        </h3>
+                        <div class="edu-timeline">
+                            <div class="edu-item">
+                                <strong>Bachelor's Degree (CS)</strong>
+                                <div style="font-size:0.85rem; color:var(--text-muted)">MCC, Bangalore · Pursuing</div>
+                            </div>
+                            <div class="edu-item">
+                                <strong>Diploma in Computer Engineering</strong>
+                                <div style="font-size:0.85rem; color:var(--text-muted)">DBRAIT, Port Blair · 3 Years
+                                </div>
+                            </div>
+                            <div class="edu-item">
+                                <strong>12th Standard</strong>
+                                <div style="font-size:0.85rem; color:var(--text-muted)">GMSSS, Aberdeen, Port Blair
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 2. Experience & Skills Tab -->
+            <div id="experience" class="tab-content">
+                <div class="skills-container">
+                    <span class="skill-tag">Data Structures & Algo</span>
+                    <span class="skill-tag">DBMS</span>
+                    <span class="skill-tag">Computer Networks</span>
+                    <span class="skill-tag">OS (Linux)</span>
+                    <span class="skill-tag">AWS Cloud</span>
+                    <span class="skill-tag">Advanced Networking</span>
+                </div>
+
+                <div class="content-grid exp-grid">
+                    <div class="c-card exp-item">
+                        <i class="fas fa-terminal"></i>
+                        <div>
+                            <strong>Programming Languages</strong>
+                            <p>C, C++, Java, Advanced Java (JDBC, Desktop Apps), SQL, Python, PHP.</p>
+                        </div>
+                    </div>
+                    <div class="c-card exp-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div>
+                            <strong>Mobile Development</strong>
+                            <p>Production-ready Android apps (Java, Android Studio). Full stack implementation: UI/UX,
+                                SQLite, REST APIs, and Firebase.</p>
+                        </div>
+                    </div>
+                    <div class="c-card exp-item">
+                        <i class="fas fa-cloud"></i>
+                        <div>
+                            <strong>Web & Cloud Infrastructure</strong>
+                            <p>DNS mapping, SSL setups, full AWS deployments, cPanel hosting, and holistic domain
+                                management workflows.</p>
+                        </div>
+                    </div>
+                    <div class="c-card exp-item">
+                        <i class="fas fa-desktop"></i>
+                        <div>
+                            <strong>Desktop Applications</strong>
+                            <p>Robust standalone software platforms spanning Java Swing & JavaFX coupled with JDBC for
+                                data connectivity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Projects Tab -->
+            <div id="projects" class="tab-content">
+                <div class="content-grid">
+
+                    <div class="c-card proj-card">
+                        <div>
+                            <div class="proj-header">
+                                <div class="proj-icon"><i class="fas fa-pills"></i></div>
+                                <div>
+                                    <div class="proj-title">Pharmacy Inventory Management</div>
+                                    <div class="proj-meta"><i class="fas fa-desktop"></i> Desktop Application</div>
+                                </div>
+                            </div>
+                            <div class="proj-desc">
+                                Complete desktop inventory solution for pharmacy stores featuring automated expiry
+                                tracking, stock alerts, and a comprehensive billing & POS system. Engineered entirely
+                                natively in Java.
+                            </div>
+                        </div>
+                        <div class="proj-tags">
+                            <span class="proj-tag"><i class="fab fa-java"></i> Java</span>
+                            <span class="proj-tag"><i class="fas fa-database"></i> MySQL</span>
+                            <span class="proj-tag">JavaFX</span>
+                            <span class="proj-tag">JDBC</span>
+                        </div>
+                    </div>
+
+                    <div class="c-card proj-card">
+                        <div>
+                            <div class="proj-header">
+                                <div class="proj-icon" style="background: #eab308;"><i class="fas fa-landmark"></i>
+                                </div>
+                                <div>
+                                    <div class="proj-title">RCS Office Management System</div>
+                                    <div class="proj-meta"><i class="fas fa-globe"></i> Enterprise Web Platform</div>
+                                </div>
+                            </div>
+                            <div class="proj-desc">
+                                Enterprise-grade HR solution built for Government Zone Infrastructure in Sri
+                                Vijayapuram. Manages strict employee lifecycles, complex leave rules, zone transfers,
+                                and role-based approvals securely.
+                            </div>
+                        </div>
+                        <div class="proj-tags">
+                            <span class="proj-tag"><i class="fab fa-php"></i> PHP</span>
+                            <span class="proj-tag"><i class="fas fa-database"></i> MySQL</span>
+                            <span class="proj-tag"><i class="fab fa-aws"></i> AWS</span>
+                            <span class="proj-tag"><i class="fab fa-python"></i> Python</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div class="content-inner">
-        <!-- Profile Header - Phone number removed, fixed marker icon -->
-        <div class="profile-row">
-            <div class="name-section">
-                <h1>Sayen Akhtar Shaikh</h1>
-                <div class="student-chip">
-                    <i class="fas fa-laptop-code"></i> Bachelor of Computer Science (Pursuing)
-                </div>
-                <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #4f6f87;">
-                    <i class="fas fa-calendar-alt"></i> DOB: 6<sup>th</sup> September 2005
-                </div>
-            </div>
-            <div class="contact-block">
-                <p><i class="fas fa-map-marker-alt"></i> Bangalore, India</p>
-                <p><i class="fas fa-envelope"></i> <a href="mailto:work.sayen@protonmail.com">work.sayen@protonmail.com</a></p>
-            </div>
-        </div>
+    <script>
+        // Tab Switching Logic
+        function switchTab(tabId, element) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
 
-        <div class="info-grid">
-            <!-- Education Section -->
-            <div class="card-modern">
-                <h3><i class="fas fa-graduation-cap"></i> Educational Qualification</h3>
-                <div class="edu-list">
-                    <div class="edu-entry">
-                        <div class="edu-title">📘 10th Standard</div>
-                        <div class="edu-meta">GSSS, Shaheed Dweep, South Andaman</div>
-                    </div>
-                    <div class="edu-entry">
-                        <div class="edu-title">📙 12th Standard</div>
-                        <div class="edu-meta">GMSSS, Aberdeen, Port Blair</div>
-                    </div>
-                    <div class="edu-entry">
-                        <div class="edu-title">🎓 Diploma in Computer Engineering (3 years)</div>
-                        <div class="edu-meta">DBRAIT, Pahargaon, Port Blair</div>
-                    </div>
-                    <div class="edu-entry">
-                        <div class="edu-title">📚 Bachelor's Degree (Computer Science) – Current</div>
-                        <div class="edu-meta">MCC, Bangalore · <strong>Pursuing</strong></div>
-                    </div>
-                </div>
-                <div style="margin-top: 1rem;">
-                    <div style="font-weight: 600; font-size: 0.85rem; margin-bottom: 6px;">📌 Core Competencies</div>
-                    <div class="tech-stack">
-                        <span class="skill-badge">Data Structures & Algorithms</span>
-                        <span class="skill-badge">DBMS</span>
-                        <span class="skill-badge">Computer Networks</span>
-                        <span class="skill-badge">OS (Linux)</span>
-                        <span class="skill-badge">AWS Cloud</span>
-                        <span class="skill-badge">Advanced Networking</span>
-                    </div>
-                </div>
-            </div>
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
 
-            <!-- Technical Experience -->
-            <div class="card-modern">
-                <h3><i class="fas fa-briefcase"></i> Technical Experience</h3>
-                <ul class="exp-list">
-                    <li><i class="fas fa-code"></i> <strong>Programming Languages Known:</strong> C, C++, Java, Advanced Java (JDBC, Desktop Apps), SQL, Python, PHP.</li>
-                    <li><i class="fas fa-database"></i> <strong>Core CS:</strong> DSA, DBMS, Fundamentals & Advanced Networking, OS (Linux).</li>
-                    <li><i class="fas fa-mobile-alt"></i> <strong>Mobile Development:</strong> Built production-ready Android applications using Java and Android Studio. Apps are designed, developed, and tested for deployment — can be published to Google Play Store or distributed as APKs for internal use. Experience includes UI/UX implementation, local database (SQLite), REST API integration, and Firebase services.</li>
-                    <li><i class="fas fa-cloud-upload-alt"></i> <strong>Web & Cloud:</strong> Experienced in purchasing domains from registrars (GoDaddy, Namecheap, Hostinger) and deploying websites using various hosting platforms including Hostinger, AWS, and cPanel-based shared hosting. Managed DNS configurations, SSL certificates, and server deployments.</li>
-                    <li><i class="fas fa-desktop"></i> <strong>Desktop Applications:</strong> Java Swing/JavaFX with JDBC for database connectivity.</li>
-                </ul>
-            </div>
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            // Add active class to clicked nav item
+            element.classList.add('active');
 
-            <!-- PROJECT 1: Pharmacy Inventory Management System -->
-            <div class="project-showcase">
-                <div class="project-header">
-                    <div class="project-icon pharmacy">
-                        <i class="fas fa-plus-circle"></i>
-                    </div>
-                    <div>
-                        <div class="project-title">Pharmacy Inventory Management System</div>
-                        <div class="project-subtitle">
-                            <i class="fas fa-desktop"></i> Desktop Application · Java + JDBC + Swing/JavaFX
-                            <span class="org-badge"><i class="fas fa-hospital-user"></i> Retail Pharmacy</span>
-                            <span class="location-badge"><i class="fas fa-chart-line"></i> Inventory + Expiry Tracking</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <p style="font-size: 0.92rem; margin-bottom: 0.8rem; line-height: 1.5;">
-                    <strong>Complete desktop inventory solution</strong> for pharmacy stores with <strong>expiry date tracking</strong>, 
-                    stock alerts, billing, and supplier management. Built using <strong>Java</strong> with <strong>JDBC</strong> for MySQL 
-                    connectivity and <strong>Swing/JavaFX</strong> for the modern graphical user interface.
-                </p>
+            // Update Pane Title text dynamically
+            const titles = {
+                'overview': 'About Me',
+                'experience': 'Skills & Experience',
+                'projects': 'Featured Projects'
+            };
+            document.getElementById('paneTitle').innerText = titles[tabId];
+        }
 
-                <div class="feature-list">
-                    <span class="feature-item"><i class="fas fa-calendar-exclamation"></i> Expiry Date Tracking</span>
-                    <span class="feature-item"><i class="fas fa-bell"></i> Auto-expiry Alerts</span>
-                    <span class="feature-item"><i class="fas fa-boxes"></i> Stock Management</span>
-                    <span class="feature-item"><i class="fas fa-receipt"></i> Billing System</span>
-                    <span class="feature-item"><i class="fas fa-truck"></i> Supplier Management</span>
-                    <span class="feature-item"><i class="fas fa-chart-line"></i> Low Stock Warnings</span>
-                    <span class="feature-item"><i class="fas fa-search"></i> Product Search</span>
-                    <span class="feature-item"><i class="fas fa-file-pdf"></i> Sales Reports</span>
-                </div>
+        // Live Clock functionality
+        const updateClock = () => {
+            const now = new Date();
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('clock').textContent = now.toLocaleTimeString(undefined, options);
+        };
 
-                <div class="workflow-grid">
-                    <div class="workflow-card">
-                        <i class="fas fa-hourglass-half"></i> <strong>Expiry Management</strong><br>
-                        <span style="font-size: 0.7rem;">Track expiry dates · Notify near-expiry products · Auto-flag expired items</span>
-                    </div>
-                    <div class="workflow-card">
-                        <i class="fas fa-chart-simple"></i> <strong>Stock Alerts</strong><br>
-                        <span style="font-size: 0.7rem;">Low inventory warnings · Reorder suggestions · Dashboard metrics</span>
-                    </div>
-                    <div class="workflow-card">
-                        <i class="fas fa-cash-register"></i> <strong>Billing & POS</strong><br>
-                        <span style="font-size: 0.7rem;">Fast checkout · Bill printing · GST calculation</span>
-                    </div>
-                </div>
+        // Initialize Clock
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 
-                <div style="background: #eef3fa; border-radius: 1rem; padding: 0.6rem 1rem; margin: 0.6rem 0;">
-                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; justify-content: space-between;">
-                        <div>
-                            <i class="fab fa-java" style="color:#2c7da0;"></i> 
-                            <strong>Java Desktop Application</strong> — JDBC · Swing/JavaFX GUI · MySQL Backend
-                        </div>
-                        <div class="tech-stack-project">
-                            <span class="skill-badge"><i class="fab fa-java"></i> Java</span>
-                            <span class="skill-badge"><i class="fas fa-database"></i> JDBC</span>
-                            <span class="skill-badge"><i class="fas fa-desktop"></i> Swing/JavaFX</span>
-                            <span class="skill-badge"><i class="fas fa-database"></i> MySQL</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 0.6rem; font-size: 0.8rem; background: #eef3fa; padding: 0.5rem 1rem; border-radius: 40px; display: inline-block;">
-                    <i class="fas fa-chart-line" style="color:#2c7da0;"></i> <strong>Impact:</strong> Reduced inventory losses by preventing expired stock sales · Streamlined billing operations
-                </div>
-            </div>
-
-            <!-- PROJECT 2: RCS Office Management System -->
-            <div class="project-showcase">
-                <div class="project-header">
-                    <div class="project-icon rcs">
-                        <i class="fas fa-building-gear"></i>
-                    </div>
-                    <div>
-                        <div class="project-title">RCS Office Management System</div>
-                        <div class="project-subtitle">
-                            <i class="fas fa-map-pin"></i> Sri Vijayapuram, Andaman & Nicobar Islands
-                            <span class="org-badge"><i class="fas fa-landmark"></i> Government Zone Infrastructure</span>
-                            <span class="location-badge"><i class="fas fa-umbrella-beach"></i> A&N Islands</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <p style="font-size: 0.92rem; margin-bottom: 0.8rem; line-height: 1.5;">
-                    <strong>Enterprise-grade HR solution</strong> built for the RCS Office, <strong>Sri Vijayapuram</strong> — located in the 
-                    <strong>Andaman & Nicobar Islands</strong>, India. The system manages employee lifecycle, leave tracking, inter‑zone transfers, 
-                    and role‑based approvals for this geographically strategic island region. Complete audit trails and digital receipt generation.
-                </p>
-
-                <div class="feature-list">
-                    <span class="feature-item"><i class="fas fa-users"></i> Employee Management</span>
-                    <span class="feature-item"><i class="fas fa-calendar-check"></i> Leave Requests & Balances</span>
-                    <span class="feature-item"><i class="fas fa-exchange-alt"></i> Zone Transfer System</span>
-                    <span class="feature-item"><i class="fas fa-stamp"></i> Digital Receipts (ReceiptID)</span>
-                    <span class="feature-item"><i class="fas fa-user-shield"></i> Role-Based Access</span>
-                    <span class="feature-item"><i class="fas fa-chart-line"></i> Audit Trail & System Logs</span>
-                    <span class="feature-item"><i class="fas fa-globe"></i> Geographic Hierarchy</span>
-                    <span class="feature-item"><i class="fas fa-file-alt"></i> Supporting Documents</span>
-                </div>
-
-                <div class="workflow-grid">
-                    <div class="workflow-card">
-                        <i class="fas fa-tasks"></i> <strong>Leave Workflow</strong><br>
-                        <span style="font-size: 0.7rem;">Request → Competent Authority → Balance Update → Receipt</span>
-                    </div>
-                    <div class="workflow-card">
-                        <i class="fas fa-arrows-alt"></i> <strong>Transfer Eligibility</strong><br>
-                        <span style="font-size: 0.7rem;">MinTenure validation → Approval → Zone/Location update</span>
-                    </div>
-                    <div class="workflow-card">
-                        <i class="fas fa-shield-alt"></i> <strong>Competent Authority</strong><br>
-                        <span style="font-size: 0.7rem;">Designation-based approval with limits</span>
-                    </div>
-                </div>
-
-                <div style="background: #eef3fa; border-radius: 1rem; padding: 0.6rem 1rem; margin: 0.6rem 0;">
-                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; justify-content: space-between;">
-                        <div>
-                            <i class="fas fa-database" style="color:#2c7da0;"></i> 
-                            <strong>Normalized MySQL Schema</strong> — 20+ tables with foreign keys, audit fields, and receipt tracking
-                        </div>
-                        <div class="tech-stack-project">
-                            <span class="skill-badge"><i class="fas fa-database"></i> MySQL</span>
-                            <span class="skill-badge"><i class="fab fa-php"></i> PHP</span>
-                            <span class="skill-badge"><i class="fab fa-python"></i> Python</span>
-                            <span class="skill-badge"><i class="fas fa-cloud-upload-alt"></i> AWS</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 0.6rem; font-size: 0.8rem; background: #eef3fa; padding: 0.5rem 1rem; border-radius: 40px; display: inline-block;">
-                    <i class="fas fa-crown" style="color:#e6a017;"></i> <strong>Impact:</strong> Centralized HR operations for Sri Vijayapuram zone (A&N Islands) · 40% faster processing · Full audit compliance
-                </div>
-            </div>
-        </div>
-
-        <!-- Professional Objective -->
-        <div class="highlight-block">
-            <p><i class="fas fa-bullseye" style="color:#2c7da0;"></i> <strong>Professional Aim:</strong> I aim to work on real-world problems to continuously learn, improve my skills, and explore emerging technologies.</p>
-        </div>
-
-        <!-- Declaration -->
-        <div class="footer-note">
-            <i class="far fa-check-circle"></i> All the information provided above is true to the best of my knowledge.
-            <br><span style="font-size: 0.7rem;">© 2026 Sayen Akhtar Shaikh</span>
-        </div>
-    </div>
-</div>
-
-<!-- Live Date & Time Script -->
-<script>
-    (function updateDateTime() {
-        const now = new Date();
-        const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-        const formattedDate = now.toLocaleDateString(undefined, dateOptions);
-        const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-        const formattedTime = now.toLocaleTimeString(undefined, timeOptions);
-        const fullString = `${formattedDate} · ${formattedTime}`;
-        const dateSpan = document.getElementById('dateTimeText');
-        if (dateSpan) dateSpan.textContent = fullString;
-        setTimeout(updateDateTime, 1000);
-    })();
-    window.addEventListener('DOMContentLoaded', () => {
-        const now = new Date();
-        const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-        const formattedDate = now.toLocaleDateString(undefined, dateOptions);
-        const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-        const formattedTime = now.toLocaleTimeString(undefined, timeOptions);
-        const fullString = `${formattedDate} · ${formattedTime}`;
-        const dateSpan = document.getElementById('dateTimeText');
-        if (dateSpan) dateSpan.textContent = fullString;
-    });
-</script>
 </body>
+
 </html>
